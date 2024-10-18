@@ -97,18 +97,22 @@ WSGI_APPLICATION = 'djangocrud.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'web_escuela_mrcy',
-        # 'USER': 'dev',
-        # 'PASSWORD': '0000',
-        # 'HOST': 'localhost',
-        # 'PORT': '3306',
-        dj_database_url.config(
+    'default': dj_database_url.config(
             default='mysql://dev:0000@localhost:3306/web_escuela_mrcy',
             conn_max_age=600
         )
-    }
+    # 'default': {
+    #     # 'ENGINE': 'django.db.backends.mysql',
+    #     # 'NAME': 'web_escuela_mrcy',
+    #     # 'USER': 'dev',
+    #     # 'PASSWORD': '0000',
+    #     # 'HOST': 'localhost',
+    #     # 'PORT': '3306',
+    #     dj_database_url.config(
+    #         default='mysql://dev:0000@localhost:3306/web_escuela_mrcy',
+    #         conn_max_age=600
+    #     )
+    # }
 }
 
 
