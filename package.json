@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "tailwindcss-multi-theme": "^1.0.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/custom-forms": "^0.2.1"
+  }
+}

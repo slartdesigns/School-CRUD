@@ -1,0 +1,16 @@
+{% extends 'main_base.html' %}
+
+{% block content %}
+
+<nav>
+    <ul>
+        <li>
+            <a href='{% url "log_in" %}'>Login</a>
+        </li>
+        <li>
+            <a href='{% url "create_account" %}'>Create Account</a>
+        </li>
+    </ul>
+</nav>
+
+{% endblock %}

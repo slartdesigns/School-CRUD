@@ -1,0 +1,3 @@
+django.db.backends.mysql
+venv
+__pycache__
