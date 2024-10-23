@@ -151,17 +151,13 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # This production code might break development mode, so we check whether we're in DEBUG mode
-# if not DEBUG:
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STORAGES = {
-    'staticfiles': {
-    'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-    },
-}
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    # STATICFILES_DIRS = (
-    #     os.path.join(BASE_DIR, 'static'),
-    # )
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STORAGES = {
+        'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        },
+    }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
