@@ -60,14 +60,15 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.contrib.staticfiles.middleware.StaticFilesMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
@@ -161,7 +162,11 @@ if not DEBUG:
         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
         },
     }
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # 
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static') 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

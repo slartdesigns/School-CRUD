@@ -17,9 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from djangocrud import settings
+
 urlpatterns = [
     path('__reload__/', include('django_browser_reload.urls')),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('auth/', include('dashboard.urls')),
 ]
+
+# if settings.DEBUG:
+#     urlpatterns += 'static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)'
+#     urlpatterns += 'static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)'
