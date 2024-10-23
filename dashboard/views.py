@@ -48,7 +48,7 @@ def dashboard_admins(request):
                      Courses(name_type='Educ. Media', grade='5to año'),]
         if request.method == 'GET':
             s_count =  s_user.count()
-            return render(request, 'dashboard-admins.html',{
+            return render(request, 'dashboard_admins.html',{
                 'scounts': s_count,
                 'tuser': t_user,
                 'suser': s_user,
@@ -59,10 +59,10 @@ def dashboard_admins(request):
                 Sections.objects.bulk_create(sect_list)
                 Courses.objects.bulk_create(cour_list)
                 print('Datos creados')
-                return redirect('/auth/dashboard-admins')
+                return redirect('/auth/dashboard_admins')
             except:
                 print('Fallo en la creacion de datos')
-                return redirect('/auth/dashboard-admins')
+                return redirect('/auth/dashboard_admins')
     else:
         return redirect('../login')
 
@@ -70,7 +70,7 @@ def dashboard_admins(request):
 def dashboard_bills(request):
     if auth_user(request) == True:
         if request.method == 'GET':
-            return render(request, 'dashboard-bills.html',{
+            return render(request, 'dashboard_bills.html',{
                 'suser': s_user,
             })
         else:
@@ -83,7 +83,7 @@ def dashboard_bills(request):
 def dashboard_teachers(request):
     if auth_user(request) == True:
         if request.method == 'GET':
-            return render(request, 'dashboard-teachers.html',{
+            return render(request, 'dashboard_teachers.html',{
                 'schedules':sch,
             })
         else:
@@ -95,7 +95,7 @@ def dashboard_teachers(request):
 def dashboard_students(request):
     if auth_user(request) == True:
         if request.method == 'GET':
-            return render(request, 'dashboard-students.html',{
+            return render(request, 'dashboard_students.html',{
                 'schedules':sch,
             })
         else:
