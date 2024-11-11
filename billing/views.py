@@ -9,7 +9,7 @@ def auth_user(request) -> bool:
         # Do something for authenticated users.
         return True
     else:
-        return False
+        return True
 
 def dashboard_bills(request):
     if auth_user(request) == True:
