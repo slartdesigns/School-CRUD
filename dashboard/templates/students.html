@@ -50,7 +50,7 @@
         <section class="w-full flex justify-between space-x-4 mt-4">
           <label class="w-full block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Correo</span>
-            <input name="email" type="email"
+            <input name="email1" type="email"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Janedoe@gmail.com" />
           </label>
@@ -66,11 +66,20 @@
           class="w-full flex justify-between flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
           <label class="block w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Cédula</span>
-            <input name="idcard1" type="tel"
-              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="12345678" />
+            <div class="flex gap-2">
+              <select name="idtype1"
+                class="block w-[88px] mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+                <option value="0">...</option>
+                <option value="V">V</option>
+                <option value="E">E</option>
+                <option value="P">P</option>
+              </select>
+              <input name="idcard1" type="tel"
+                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="12345678" />
+            </div>
           </label>
-          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+          <label class="block w-[46.5%] max-w-16 min-[425px]:w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Edad</span>
             <input name="age" type="number"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -83,27 +92,60 @@
               <option value="0">...</option>
               <option value="Masculino">Masculino</option>
               <option value="Femenino">Femenino</option>
-              <option value="3">Otro</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </label>
+        </section>
+
+        <section
+          class="w-full flex justify-between flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          <label class="block text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Fecha de nacimiento</span>
+            <input name="birthdate" type="date" maxlength="250"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" />
+          </label>
+          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Pais</span>
+            <select name="country1"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+              <option value="0">...</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Perú">Perú</option>
+              <option value="Chile">Chile</option>
             </select>
           </label>
           <label class="block w-[46.5%] min-[425px]:w-full text-sm">
-            <span class="text-gray-700 dark:text-gray-400">Grado</span>
-            <select name="course"
+            <span class="text-gray-700 dark:text-gray-400">Estado</span>
+            <select name="state1"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
               <option value="0">...</option>
-              {% for course in courses %}
-              <option value="{{course.id}}">{{course.grade}}</option>
-              {% endfor %}
+              <option value="Amazonas">Amazonas</option>
+              <option value="Mérida">Mérida</option>
+              <option value="Nueva Esparta">Nueva Esparta</option>
+            </select>
+          </label>
+        </section>
+
+        <section
+          class="w-full h-min flex justify-between content-center flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Ciudad</span>
+            <select name="city1"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+              <option value="0">...</option>
+              <option value="La Esmeralda">La Esmeralda</option>
+              <option value="El Vigía">El Vigía</option>
+              <option value="La Asunción">La Asunción</option>
             </select>
           </label>
           <label class="block w-[46.5%] min-[425px]:w-full text-sm">
-            <span class="text-gray-700 dark:text-gray-400">Seccion</span>
-            <select name="section"
+            <span class="text-gray-700 dark:text-gray-400">Municipio</span>
+            <select name="municipality1"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
               <option value="0">...</option>
-              {% for section in sections %}
-              <option value="{{section.id}}">{{section.name}}</option>
-              {% endfor %}
+              <option value="Alto Orinoco">Alto Orinoco</option>
+              <option value="Alberto Adriani">Alberto Adriani</option>
+              <option value="Arismendi">Arismendi</option>
             </select>
           </label>
         </section>
@@ -111,12 +153,11 @@
         <section
           class="w-full h-min flex justify-between content-center flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
           <label class="w-full block text-sm">
-            <span class="text-gray-700 dark:text-gray-400">Dirección</span>
+            <span class="text-gray-700 dark:text-gray-400">Dirección de habitación</span>
             <input name="address1" type="text" maxlength="250"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="Carretera Ríos, 68, Piso 30" />
           </label>
-          <!-- File input -->
           <div class="w-full h-max mt-auto">
             <label for="small-file-input" class="block text-sm">
               <span class="text-gray-700 dark:text-gray-400">Foto</span>
@@ -130,6 +171,83 @@
                 ">
             </label>
           </div>
+        </section>
+
+        <hr class="mt-8 mb-4 border border-gray-700" />
+
+        <section class="w-full flex space-x-4">
+          <!-- <button type="submit"
+            class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+            Crear
+          </button> -->
+          <button
+            class="px-4 py-2 text-sm font-medium leading-5 text-gray-400 transition-colors duration-150 border border-gray-600 rounded-lg active:bg-purple-600 hover:text-white hover:bg-purple-700 hover:border-purple-600 focus:outline-none focus:shadow-outline-purple">
+            Limpiar
+          </button>
+        </section>
+      </section>
+
+      <section class="p-4 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+
+        <section
+          class="w-full flex justify-between flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0">
+          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Curso</span>
+            <select name="course"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+              <option value="0">...</option>
+              {% for course in courses %}
+              <option value="{{course.id}}">{{course.grade}}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Sección</span>
+            <select name="section"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+              <option value="0">...</option>
+              {% for section in sections %}
+              <option value="{{section.id}}">{{section.name}}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label class="block text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Fecha de inicio</span>
+            <input name="startdate" type="date" maxlength="250"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" />
+          </label>
+        </section>
+
+        <section
+          class="w-full flex justify-between flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Estatus</span>
+            <select name="status"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+              <option value="0">...</option>
+              <option value="Activo">Activo</option>
+              <option value="Bloqueado">Bloqueado</option>
+              <option value="Retirado">Retirado</option>
+            </select>
+          </label>
+          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Tipo de escolaridad</span>
+            <select name="shooling"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+              <option value="0">...</option>
+              <option value="Regular">Regular</option>
+              <option value="Repitiente">Repitiente</option>
+            </select>
+          </label>
+          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Tipo de educación</span>
+            <select name="education"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+              <option value="0">...</option>
+              <option value="Presencial">Presencial</option>
+              <option value="Virtual">Virtual</option>
+            </select>
+          </label>
         </section>
 
         <hr class="mt-8 mb-4 border border-gray-700" />
@@ -164,11 +282,20 @@
         </section>
 
         <section class="w-full flex justify-between space-x-4 mt-4">
-          <label class="w-full block text-sm">
+          <label class="block w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Cédula</span>
-            <input name="idcard2" type="number"
-              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="25429781" />
+            <div class="flex gap-2">
+              <select name="idtype2"
+                class="block w-[88px] mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+                <option value="0">...</option>
+                <option value="V">V</option>
+                <option value="E">E</option>
+                <option value="P">P</option>
+              </select>
+              <input name="idcard2" type="tel"
+                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="12345678" />
+            </div>
           </label>
           <label class="w-full block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Teléfono</span>
@@ -181,10 +308,10 @@
         <section
           class="w-full h-min flex justify-between content-center flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
           <label class="w-full block text-sm">
-            <span class="text-gray-700 dark:text-gray-400">Dirección</span>
-            <input name="address2" type="text" maxlength="250"
+            <span class="text-gray-700 dark:text-gray-400">Correo</span>
+            <input name="email2" type="email"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-              placeholder="Carretera Ríos, 68, Piso 30" />
+              placeholder="Janedoe@gmail.com" />
           </label>
           <div class="w-full h-max mt-auto">
             <label for="small-file-input" class="block text-sm">
@@ -199,6 +326,37 @@
             ">
             </label>
           </div>
+        </section>
+
+        <section
+          class="w-full h-min flex justify-between content-center flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          <div class="w-full text-sm">
+            <span class="text-gray-700 dark:text-gray-400">¿Desea usar la misma dirección?</span>
+            <div class="mt-2 flex gap-4">
+              <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
+                <input
+                  type="radio"
+                  class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  name="accountType"
+                  value="personal"/>
+                <span class="ml-2">Sí</span>
+              </label>
+              <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
+                <input
+                  type="radio"
+                  class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                  name="accountType"
+                  value="busines"/>
+                <span class="ml-2">No, agregar otra.</span>
+              </label>
+            </div>
+          </div>
+          <!-- <label class="w-full block text-sm">
+            <span class="text-gray-700 dark:text-gray-400">Dirección</span>
+            <input name="address2" type="text" maxlength="250"
+              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              placeholder="Carretera Ríos, 68, Piso 30" />
+          </label> -->
         </section>
 
         <hr class="mt-8 mb-4 border border-gray-700" />

@@ -11,8 +11,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_("email address"), unique=True)
-    user_type_data=((1,'HOD'),(2,'staff'),(3,'users'))
-    user_type=models.CharField(default=1,choices=user_type_data,max_length=10)
+    user_type_data=((1,'HOD'),(2,'staff'),(3,'users'),(4,'bills'))
+    user_type=models.CharField(default=1,choices=user_type_data,max_length=30)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -21,6 +21,12 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+    
+class SchoolPeriod(models.Model):
+    id=models.AutoField(primary_key=True)
+    period=models.CharField(max_length=125)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
 
 class AdminHOD(models.Model):
     id=models.AutoField(primary_key=True)
@@ -32,7 +38,7 @@ class AdminHOD(models.Model):
 class Courses(models.Model):
     id=models.AutoField(primary_key=True)
     name_type_data = (
-        (1,'Preescolar'),
+        (1,'Educ. Inicial'),
         (2,'Educ. Básica'),
         (3,'Educ. Media')
         )
@@ -73,9 +79,22 @@ class Subjects(models.Model):
 class Teachers(models.Model):
     id=models.AutoField(primary_key=True)
     admin=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='teachers')
+    type_idcard_data=((1,'V'),(2,'E'),(3,'P'))
+    type_idcard=models.CharField(choices=type_idcard_data, max_length=5)
+    idcard=models.PositiveIntegerField(default=0)
+    gender_data=((1,'Masculino'),(2,'Femenino'),(3,'Otro'))
+    gender=models.CharField(choices=gender_data, max_length=50)
+    birthdate=models.DateField(null=True)
     phone=PhoneNumberField()
     address=models.TextField()
-    course_id=models.ManyToManyField(Courses)
+    status_data=((1,'Activo'),(2,'Bloqueado'),(3,'Retirado'))
+    status=models.CharField(choices=status_data, max_length=50)
+    course_type_data = (
+        (1,'Educ. Inicial'),
+        (2,'Educ. Básica'),
+        (3,'Educ. Media')
+        )
+    course_type=models.CharField(choices=course_type_data, max_length=50)
     subject_id=models.ManyToManyField(Subjects)
     section_id=models.ManyToManyField(Sections)
     created_at=models.DateTimeField(auto_now_add=True)
@@ -83,20 +102,46 @@ class Teachers(models.Model):
 
 class Guardians(models.Model):
     id=models.AutoField(primary_key=True)
-    name=models.CharField(max_length=255,)
+    name=models.CharField(max_length=255)
+    type_idcard_data=((1,'V'),(2,'E'),(3,'P'))
+    type_idcard=models.CharField(choices=type_idcard_data, max_length=5)
     idcard=models.PositiveIntegerField(default=0)
     phone=PhoneNumberField()
+    email=models.EmailField()
+    address=models.TextField()
     profile_pic=models.FileField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
+
+class Tuition(models.Model):
+    id=models.AutoField(primary_key=True)
+    status_data=((1,'Activo'),(2,'Bloqueado'),(3,'Retirado'))
+    status=models.CharField(choices=status_data, max_length=50)
+    type_shooling_data=((1,'Regular'),(2,'Repitiente'))
+    type_shooling=models.CharField(choices=type_shooling_data, max_length=50)
+    type_education_data=((1,'Presencial'),(2,'Virtual'))
+    type_education=models.CharField(choices=type_education_data, max_length=50)
+    start_date=models.DateField(null=True)
+    withdrawal_date=models.DateField(null=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
+
+class Groups(models.Model):
+    id=models.AutoField(primary_key=True)
+    name=models.CharField(max_length=255)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
 
 class Students(models.Model):
     id=models.AutoField(primary_key=True)
     admin=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='students')
+    type_idcard_data=((1,'V'),(2,'E'),(3,'P'))
+    type_idcard=models.CharField(choices=type_idcard_data, max_length=5)
     idcard=models.PositiveIntegerField(default=0)
     age=models.PositiveSmallIntegerField(default=0)
     gender_data=((1,'Masculino'),(2,'Femenino'),(3,'Otro'))
-    gender=models.CharField(choices=gender_data, max_length=30)
+    gender=models.CharField(choices=gender_data, max_length=50)
+    birthdate=models.DateField(null=True)
     phone=PhoneNumberField()
     address=models.TextField()
     profile_pic=models.FileField()
@@ -104,7 +149,35 @@ class Students(models.Model):
     session_end=models.DateField(null=True)
     course_id=models.ForeignKey(Courses,on_delete=models.PROTECT, null=True)
     section_id=models.ForeignKey(Sections,on_delete=models.PROTECT, null=True)
-    guardian_id=models.OneToOneField(Guardians,on_delete=models.CASCADE, null=True)
+    guardian_id=models.ForeignKey(Guardians,on_delete=models.CASCADE, null=True)
+    tuition_id=models.OneToOneField(Tuition,on_delete=models.CASCADE, null=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
+
+class Notes(models.Model):
+    id=models.AutoField(primary_key=True)
+    first_period=models.PositiveSmallIntegerField(default=0)
+    second_period=models.PositiveSmallIntegerField(default=0)
+    third_period=models.PositiveSmallIntegerField(default=0)
+    final=models.PositiveSmallIntegerField(default=0)
+    literal_data=((1,'A'),(2,'B'),(3,'C'),(4,'D'),(5,'E'),(6,'P'))
+    literal=models.CharField(choices=literal_data, max_length=6, default='P')
+    revision=models.PositiveSmallIntegerField(default=0)
+    group_id=models.ForeignKey(Groups,on_delete=models.PROTECT)
+    subject_id=models.ForeignKey(Subjects,on_delete=models.CASCADE)
+    student_id=models.ForeignKey(Students,on_delete=models.CASCADE)
+    teacher_id=models.ForeignKey(Teachers,on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now_add=True)
+
+class Absences(models.Model):
+    id=models.AutoField(primary_key=True)
+    first_period=models.PositiveSmallIntegerField(default=0)
+    first_observation=models.CharField(max_length=255, null=True)
+    second_period=models.PositiveSmallIntegerField(default=0)
+    second_observation=models.CharField(max_length=255, null=True)
+    third_period=models.PositiveSmallIntegerField(default=0)
+    third_observation=models.CharField(max_length=255, null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
 
@@ -119,7 +192,7 @@ class Documents(models.Model):
         (6,'Citación'),
         (7,'Constancia')
         )
-    doc_type=models.CharField(choices=doc_type_data,max_length=30,)
+    doc_type=models.CharField(choices=doc_type_data,max_length=50,)
     document=models.FileField()
     student_id=models.ForeignKey(Students,on_delete=models.CASCADE)
     course_id=models.ForeignKey(Courses,on_delete=models.PROTECT)
@@ -146,6 +219,7 @@ class Schedules(models.Model):
     day=models.CharField(max_length=30)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now_add=True)
+
 
 # --------------------------------------------------------------
 # ---- SIGNALS -------------------------------------------------

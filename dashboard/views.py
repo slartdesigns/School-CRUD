@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from dashboard.models import CustomUser, Teachers, Students, Guardians, Subjects, Courses, Sections, Schedules
+from .models import CustomUser, Teachers, Students, Guardians, Subjects, Courses, Sections, Schedules, Tuition
 
 # Create your views here.
 t_user = CustomUser.objects.filter(user_type=2).all()
@@ -10,6 +10,7 @@ sec = Sections.objects.all()
 sub = Subjects.objects.all()
 sch = Schedules.objects.all()
 gua = Guardians.objects.all()
+tui = Tuition.objects.all()
 tea = Teachers.objects.all()
 
 def auth_user(request) -> bool:
@@ -32,9 +33,9 @@ def dashboard_admins(request):
         sect_list = [Sections(name='A'),
                      Sections(name='B'),]
         
-        cour_list = [Courses(name_type='Preescolar', grade='1er nivel'),
-                     Courses(name_type='Preescolar', grade='2do nivel'),
-                     Courses(name_type='Preescolar', grade='3er nivel'),
+        cour_list = [Courses(name_type='Educ. Inicial', grade='1er nivel'),
+                     Courses(name_type='Educ. Inicial', grade='2do nivel'),
+                     Courses(name_type='Educ. Inicial', grade='3er nivel'),
                      Courses(name_type='Educ. Básica', grade='1er grado'),
                      Courses(name_type='Educ. Básica', grade='2do grado'),
                      Courses(name_type='Educ. Básica', grade='3er grado'),
@@ -59,25 +60,12 @@ def dashboard_admins(request):
                 Sections.objects.bulk_create(sect_list)
                 Courses.objects.bulk_create(cour_list)
                 print('Datos creados')
-                return redirect('/auth/dashboard_admins')
+                return redirect('/auth/dashboard-admins')
             except:
                 print('Fallo en la creacion de datos')
-                return redirect('/auth/dashboard_admins')
+                return redirect('/auth/dashboard-admins')
     else:
         return redirect('../login')
-
-
-def dashboard_bills(request):
-    if auth_user(request) == True:
-        if request.method == 'GET':
-            return render(request, 'dashboard_bills.html',{
-                'suser': s_user,
-            })
-        else:
-            pass
-    else:
-        return redirect('../login')
-    
 
 
 def dashboard_teachers(request):
@@ -114,11 +102,12 @@ def teachers(request):
                 'subjects': sub,
             })
         else:
-            # print(list(request.POST.items()))
+            print(list(request.POST.items()))
 
             courses = request.POST.get('valueCourses')
             sections = request.POST.get('valueSections')
             subjects = request.POST.get('valueSubjects')
+            address = request.POST.get('address')+', '+request.POST.get('municipality')+', '+request.POST.get('city')+', '+request.POST.get('state')+', '+request.POST.get('country')
 
             try:
                 user = CustomUser.objects.create_user(
@@ -129,14 +118,16 @@ def teachers(request):
                     user_type=2,
                 )
                 teacher = Teachers.objects.get(admin=user)
-                teacher.address = request.POST.get('address')
+                teacher.type_idcard = request.POST.get('idtype')
+                teacher.idcard = request.POST.get('idcard')
+                teacher.gender = request.POST.get('gender')
+                teacher.birthdate = request.POST.get('birthdate')
                 teacher.phone = request.POST.get('phone')
+                teacher.address = address
+                teacher.status = request.POST.get('status')
+                teacher.course_type = courses
                 teacher.save()
 
-                for course in courses:
-                    if course != ',':
-                        query = Courses.objects.get(id=course)
-                        teacher.course_id.add(query)
 
                 for section in sections:
                     if section != ',':
@@ -167,40 +158,58 @@ def students(request):
                 'guardians': gua,
             })
         else:
-            try:
-                user = CustomUser.objects.create_user(
-                    password='defaultPass',
-                    first_name=request.POST.get('first_name1'),
-                    last_name=request.POST.get('last_name1'),
-                    email=request.POST.get('email'),
-                    user_type=3,
-                )
+            print(list(request.POST.items()))
 
-                guardian_ins = Guardians.objects.create(
-                    name = request.POST.get('first_name2')+' '+request.POST.get('last_name2'),
-                    phone = request.POST.get('phone2'),
-                    idcard = request.POST.get('idcard2'),
-                    profile_pic = request.POST.get('profile_pic2'),
-                )
-                guardian_ins.save()
+            address = request.POST.get('address1')+', '+request.POST.get('municipality1')+', '+request.POST.get('city1')+', '+request.POST.get('state1')+', '+request.POST.get('country1')
 
-                student = Students.objects.get(admin=user)
-                student.phone = request.POST.get('phone1')
-                student.idcard = request.POST.get('idcard1')
-                student.age = request.POST.get('age')
-                student.gender = request.POST.get('gender')
-                student.address = request.POST.get('address1')
-                student.profile_pic = request.POST.get('profile_pic1')
-                student.course_id = cou.get(id=request.POST.get('course'))
-                student.guardian_id = gua.get(id=guardian_ins.id)
-                student.section_id = sec.get(id=request.POST.get('section'))
-                student.save()
+            # try:
+            user = CustomUser.objects.create_user(
+                password='defaultPass',
+                first_name=request.POST.get('first_name1'),
+                last_name=request.POST.get('last_name1'),
+                email=request.POST.get('email1'),
+                user_type=3,
+            )
 
-                print('Estudiante creado exitosamente')
-                return redirect('/auth/students')
-            except:
-                print('Error en la creacion de estudiante')
-                return redirect('/auth/students')
+            guardian_ins = Guardians.objects.create(
+                name = request.POST.get('first_name2')+' '+request.POST.get('last_name2'),
+                type_idcard = request.POST.get('idtype2'),
+                idcard = request.POST.get('idcard2'),
+                phone = request.POST.get('phone2'),
+                email = request.POST.get('email2'),
+                address = address,
+                profile_pic = request.POST.get('profile_pic2'),
+            )
+            guardian_ins.save()
+
+            tuition_ins = Tuition.objects.create(
+                status = request.POST.get('status'),
+                type_shooling = request.POST.get('shooling'),
+                type_education = request.POST.get('education'),
+                start_date = request.POST.get('startdate'),
+            )
+            tuition_ins.save()
+
+            student = Students.objects.get(admin=user)
+            student.type_idcard = request.POST.get('idtype1')
+            student.idcard = request.POST.get('idcard1')
+            student.gender = request.POST.get('gender')
+            student.age = request.POST.get('age')
+            student.birthdate = request.POST.get('birthdate')
+            student.phone = request.POST.get('phone1')
+            student.address = address
+            student.profile_pic = request.POST.get('profile_pic1')
+            student.course_id = cou.get(id=request.POST.get('course'))
+            student.guardian_id = gua.get(id=guardian_ins.id)
+            student.section_id = sec.get(id=request.POST.get('section'))
+            student.tuition_id = tui.get(id=tuition_ins.id)
+            student.save()
+
+            print('Estudiante creado exitosamente')
+            return redirect('/auth/students')
+            # except:
+            #     print('Error en la creacion de estudiante')
+            #     return redirect('/auth/students')
     else:
         return redirect('../login')
 

@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'theme',
     'main',
     'dashboard',
+    'billing',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +112,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('postgresql://web_escuela_mrcy_user:CwNOgKfUOHS8FnXq0OKBBFopmW61TJ8V@dpg-csbobsi3esus73fu3uj0-a.oregon-postgres.render.com/web_escuela_mrcy')
+DATABASES['default'] = dj_database_url.parse('postgresql://web_escuela_mrcy_x88i_user:V4ZWAXgFN8bWx018WribPQGIdIyv1E9r@dpg-cskarkjtq21c73dl07l0-a/web_escuela_mrcy_x88i')
 
 
 # Password validation
