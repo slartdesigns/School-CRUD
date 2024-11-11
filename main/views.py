@@ -7,7 +7,7 @@ from dashboard.views import dashboard_admins
 # Create your views here.
 def home(request):
     # return render(request, 'home.html')
-    return redirect(log_in)
+    return redirect(dashboard_admins)
 
 
 def create_account(request):
