@@ -208,8 +208,10 @@
 			x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
 			@keydown.escape="closeSideMenu">
 			<div class="py-4 text-gray-500 dark:text-gray-400">
-				<a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href='{% url "home" %}'>
-					School Name
+				<a class="flex flex-col justify-center" href='{% url "dashboard-admins" %}'>
+					<img class="w-3/5 mx-auto" src="{% static 'assets/img/logo.webp' %}" alt="">
+					<!-- <p class="ml-6 text-base font-bold text-gray-800 dark:text-gray-200">U.E.P Coronel Juan José Rondón</p> -->
+					<hr class="w-full mt-4 border border-gray-700">
 				</a>
 				<ul class="mt-6">
 					<li class="relative px-6 py-3">
@@ -223,7 +225,7 @@
 										d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
 									</path>
 								</svg>
-								<span class="ml-4">Panel</span>
+								<span class="ml-4">Control de estudio</span>
 							</span>
 							<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
 								<path fill-rule="evenodd"
@@ -239,74 +241,108 @@
 							class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
 							aria-label="submenu">
 							<li
-								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'dashboard-admins' %}border-transparent{% else %}border-purple-600{% endif %}">
-								<a class="w-full" href='{% url "dashboard-admins" %}'>Control de estudio</a>
+								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'dashboard-admins' %}border-transparent{% else %}border-purple-600{% endif %}">
+								<a class="w-full" href="{% url 'dashboard-admins' %}">Panel principal</a>
 							</li>
 							<li
-								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'dashboard-bills' %}border-transparent{% else %}border-purple-600{% endif %}">
-								<a class="w-full" href='{% url "dashboard-bills" %}'>
-									Contabilidad
+								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'teachers' %}border-transparent{% else %}border-purple-600{% endif %}">
+								<a class="w-full" href="{% url 'teachers' %}">
+									Docentes
 								</a>
 							</li>
 							<li
-								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'dashboard-teachers' %}border-transparent{% else %}border-purple-600{% endif %}">
-								<a class="w-full" href='{% url "dashboard-teachers" %}'>
-									Docente
-								</a>
+								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'students' %}border-transparent{% else %}border-purple-600{% endif %}">
+								<a class="w-full" href="{% url 'students' %}">Estudiantes</a>
 							</li>
 							<li
-								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'dashboard-students' %}border-transparent{% else %}border-purple-600{% endif %}">
-								<a class="w-full" href='{% url "dashboard-students" %}'>Estudiante</a>
+								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'subjects' %}border-transparent{% else %}border-purple-600{% endif %}">
+								<a class="w-full" href="{% url 'subjects' %}">Materias</a>
+							</li>
+							<li
+								class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'schedules' %}border-transparent{% else %}border-purple-600{% endif %}">
+								<a class="w-full" href="{% url 'schedules' %}">Horarios</a>
 							</li>
 						</ul>
 						<!-- </template> -->
 					</li>
+					<hr class="w-full my-4 border border-gray-700">
+
 					<li class="relative px-6 py-3">
-						{% if request.resolver_match.view_name == 'teachers' %}
+						<button
+							class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+							@click="togglePagesMenu" aria-haspopup="true">
+							<span class="inline-flex items-center">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+								  </svg>
+								<span class="ml-4">Contabilidad</span>
+							</span>
+							<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd"
+									d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+									clip-rule="evenodd"></path>
+							</svg>
+						</button>
+						<template x-if="isPagesMenuOpen">
+							<ul x-transition:enter="transition-all ease-in-out duration-300"
+								x-transition:enter-start="opacity-25 max-h-0" x-transition:enter-end="opacity-100 max-h-xl"
+								x-transition:leave="transition-all ease-in-out duration-300"
+								x-transition:leave-start="opacity-100 max-h-xl" x-transition:leave-end="opacity-0 max-h-0"
+								class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+								aria-label="submenu">
+								<li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'dashboard-bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'dashboard-bills' %}">
+										Panel principal
+									</a>
+								</li>
+							</ul>
+						</template>
+					</li>
+
+					<hr class="w-full my-4 border border-gray-700">
+
+					<li class="relative px-6 py-3">
+						{% if request.resolver_match.view_name == 'dashboard-teachers' %}
 						<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
 						{% endif %}
 						<a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-							href='{% url "teachers" %}'>
+							href='{% url "dashboard-teachers" %}'>
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
 							  </svg>
-							<span class="ml-4">Docentes</span>
+							<span class="ml-4">Panel docentes</span>
 						</a>
 					</li>
 					<li class="relative px-6 py-3">
-						{% if request.resolver_match.view_name == 'students' %}
+						{% if request.resolver_match.view_name == 'dashboard-students' %}
 						<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
 						{% endif %}
 						<a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-							href='{% url "students" %}'>
+							href='{% url "dashboard-students" %}'>
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
 							  </svg>
-							<span class="ml-4">Estudiantes</span>
+							<span class="ml-4">Panel estudiantes</span>
 						</a>
 					</li>
+					
+					<hr class="w-full my-4 border border-gray-700">
+
 					<li class="relative px-6 py-3">
-						{% if request.resolver_match.view_name == 'subjects' %}
+						{% if request.resolver_match.view_name == 'logout' %}
 						<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
 						{% endif %}
 						<a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-							href='{% url "subjects" %}'>
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-							  </svg>
-							<span class="ml-4">Materias</span>
-						</a>
-					</li>
-					<li class="relative px-6 py-3">
-						{% if request.resolver_match.view_name == 'schedules' %}
-						<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
-						{% endif %}
-						<a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-							href='{% url "schedules" %}'>
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-							  </svg>
-							<span class="ml-4">Horarios</span>
+							href='{% url "log_out" %}'>
+							<svg class="size-6" aria-hidden="true" fill="none"
+								stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								viewBox="0 0 24 24" stroke="currentColor">
+								<path
+									d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+								</path>
+							</svg>
+							<span class="ml-4">Cerrar Sesión</span>
 						</a>
 					</li>
 				</ul>

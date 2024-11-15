@@ -107,69 +107,213 @@
       </div>
     </div>
 
-  
-    <section class="w-full flex flex-col lg:flex-row gap-8">
-
-      <section class="w-full flex flex-col gap-8">
-        <!-- New Table -->
-        <div class="w-full overflow-hidden rounded-lg shadow-xs">
-          <div class="w-full overflow-x-auto">
-            <table class="w-full whitespace-no-wrap">
-              <thead>
-                <tr
-                  class="text-normal font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-300 dark:bg-gray-800">
-                  <th class="px-4 py-3">Estudiantes en linea</th>
-                  <th class="px-4 py-3"></th>
-                  <th class="px-4 py-3"></th>
-                  <th class="px-4 py-3"></th>
-                  <th class="px-4 py-3"></th>
-                </tr>
-                <tr
-                  class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                  <th class="px-4 py-3">Nombre</th>
-                  <th class="px-4 py-3">Sección</th>
-                  <th class="px-4 py-3">Curso</th>
-                  <th class="px-4 py-3">Representante</th>
-                  <th class="px-4 py-3">Acción</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                {% for user in suser %}
-                <tr class="text-gray-700 dark:text-gray-400">
-                  <td class="px-4 py-3">
-                    <a href="#">
-                    <div class="flex items-center text-sm">
-                      <!-- Avatar with inset shadow -->
-                      <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                        <img class="object-cover w-full h-full rounded-full"
-                          src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                          alt="" loading="lazy" />
-                        <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                      </div>
-                      <div>
-                        <p class="font-semibold">{{user.first_name}} {{user.last_name}}</p>
-                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                          V-{{user.students.idcard}}
-                        </p>
-                      </div>
+    <!-- New Table -->
+    <span class="w-full px-4 py-3 text-xs font-bold tracking-wide text-left text-gray-500 uppercase border-b rounded-t-lg dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">Estudiantes de honor</span>
+    <div class="w-full overflow-hidden rounded-lg shadow-xs rounded-t-none">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+          <thead>
+            <tr
+              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <th class="px-4 py-3">Nombre</th>
+              <th class="px-4 py-3">Sección</th>
+              <th class="px-4 py-3">Curso</th>
+              <th class="px-4 py-3">Representante</th>
+              <th class="px-4 py-3">Acción</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            {% for user in suser %}
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3">
+                <a href="#">
+                <div class="flex items-center text-sm">
+                  <!-- Avatar with inset shadow -->
+                  <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                    <img class="object-cover w-full h-full rounded-full"
+                      src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                      alt="" loading="lazy" />
+                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  </div>
+                  <div>
+                    <p class="font-semibold">{{user.first_name}} {{user.last_name}}</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">
+                      V-{{user.students.idcard}}
+                    </p>
+                  </div>
+                </div>
+              </a>
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{user.students.section_id.name}}
+              </td>
+              <td class="px-4 py-3 text-xs">
+                <p
+                class="w-fit px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg lg:rounded-full dark:bg-green-700 dark:text-green-100">
+                {{user.students.course_id.grade}}
+              </p>
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{user.students.guardian_id.name}}
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex items-center space-x-4 text-sm">
+                <button data-id="{{user.id}}"
+                  class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg border border-transparent dark:text-gray-400 focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600"
+                  aria-label="Edit">
+                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                    </path>
+                  </svg>
+                </button>
+                <button data-id="{{user.id}}"
+                  class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg border border-transparent dark:text-gray-400 focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600"
+                  aria-label="Delete">
+                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      
+      <div
+        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        <span class="flex items-center col-span-3">
+          Mostrando 21-30 of 100
+        </span>
+        <span class="col-span-2"></span>
+        <!-- Pagination -->
+        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+          <nav aria-label="Table navigation">
+            <ul class="inline-flex items-center">
+              <li>
+                <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                  aria-label="Previous">
+                  <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                    <path
+                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                      clip-rule="evenodd" fill-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  1
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  2
+                </button>
+              </li>
+              <li>
+                <button
+                  class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  3
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  4
+                </button>
+              </li>
+              <li>
+                <span class="px-3 py-1">...</span>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  8
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  9
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                  aria-label="Next">
+                  <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                    <path
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clip-rule="evenodd" fill-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </span>
+      </div>
+    </div>
+    
+    <!-- New Table -->
+    <span class="mt-8 w-full px-4 py-3 text-xs font-bold tracking-wide text-left text-gray-500 uppercase border-b rounded-t-lg dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">Docentes en clase</span>
+    <div class="w-full min-w-1/2 overflow-hidden rounded-lg shadow-xs rounded-t-none">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+          <thead>
+            <!-- <tr
+              class="text-normal font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-300 dark:bg-gray-800">
+              <th class="px-4 py-3">Docentes en clase</th>
+              <th class="px-4 py-3"></th>
+              <th class="px-4 py-3"></th>
+              <th class="px-4 py-3"></th>
+            </tr> -->
+            <tr
+              class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <th class="px-4 py-3">Nombre</th>
+              <th class="px-4 py-3">Materias</th>
+              <th class="px-4 py-3">Nivel</th>
+              <th class="px-4 py-3">Acción</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            {% for user in tuser %}
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3">
+                <a href="#">
+                  <div class="flex items-center text-sm">
+                    <!-- Avatar with inset shadow -->
+                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                      <img class="object-cover w-full h-full rounded-full"
+                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                        alt="" loading="lazy" />
+                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                     </div>
-                  </a>
-                  </td>
-                  <td class="px-4 py-3 text-sm">
-                    {{user.students.section_id.name}}
-                  </td>
-                  <td class="px-4 py-3 text-xs">
-                    <p
-                    class="w-fit px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg lg:rounded-full dark:bg-green-700 dark:text-green-100">
-                    {{user.students.course_id.grade}}
-                  </p>
-                </td>
-                <td class="px-4 py-3 text-sm">
-                  {{user.students.guardian_id.name}}
-                </td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center space-x-4 text-sm">
-                    <button data-id="{{user.id}}"
+                    <div>
+                      <p class="font-semibold">{{user.first_name}} {{user.last_name}}</p>
+                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                        {{user.teachers.phone}}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </td>
+              <td class="px-4 py-3 text-sm space-y-2">
+                {% for subject in user.teachers.subject_id.all %}
+                <p>{{ subject.name }}</p>
+                {% endfor %}
+              </td>
+              <td class="px-4 py-3 text-xs space-y-2">
+                {% for course in user.teachers.course_id.all %}
+                <p
+                  class="w-fit px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg lg:rounded-full dark:bg-green-700 dark:text-green-100">
+                  {{ course.name_type }}
+                </p>
+                {% endfor %}
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex items-center space-x-4 text-sm">
+                  <form action='{% url "edit" %}' method="POST">
+                    {% csrf_token %}
+                    <button data-id="{{user.id}}" name="edit_btn" 
                       class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg border border-transparent dark:text-gray-400 focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600"
                       aria-label="Edit">
                       <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -178,519 +322,93 @@
                         </path>
                       </svg>
                     </button>
-                    <button data-id="{{user.id}}"
-                      class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg border border-transparent dark:text-gray-400 focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600"
-                      aria-label="Delete">
-                      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd"
-                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                          clip-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-              {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          
-          <div
-            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-            <span class="flex items-center col-span-3">
-              Mostrando 21-30 of 100
-            </span>
-            <span class="col-span-2"></span>
-            <!-- Pagination -->
-            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-              <nav aria-label="Table navigation">
-                <ul class="inline-flex items-center">
-                  <li>
-                    <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                      aria-label="Previous">
-                      <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                        <path
-                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                          clip-rule="evenodd" fill-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      1
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      2
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      3
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      4
-                    </button>
-                  </li>
-                  <li>
-                    <span class="px-3 py-1">...</span>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      8
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      9
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                      aria-label="Next">
-                      <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                        <path
-                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                          clip-rule="evenodd" fill-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </span>
-          </div>
-        </div>
-        
-        <!-- New Table -->
-        <div class="w-full min-w-1/2 overflow-hidden rounded-lg shadow-xs">
-          <div class="w-full overflow-x-auto">
-            <table class="w-full whitespace-no-wrap">
-              <thead>
-                <tr
-                  class="text-normal font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-300 dark:bg-gray-800">
-                  <th class="px-4 py-3">Docentes en clase</th>
-                  <th class="px-4 py-3"></th>
-                  <th class="px-4 py-3"></th>
-                  <th class="px-4 py-3"></th>
-                </tr>
-                <tr
-                  class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                  <th class="px-4 py-3">Nombre</th>
-                  <th class="px-4 py-3">Materias</th>
-                  <th class="px-4 py-3">Nivel</th>
-                  <!-- <th class="px-4 py-3">Representante</th> -->
-                  <th class="px-4 py-3">Acción</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                {% for user in tuser %}
-                <tr class="text-gray-700 dark:text-gray-400">
-                  <td class="px-4 py-3">
-                    <a href="#">
-                      <div class="flex items-center text-sm">
-                        <!-- Avatar with inset shadow -->
-                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full"
-                            src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                            alt="" loading="lazy" />
-                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                        </div>
-                        <div>
-                          <p class="font-semibold">{{user.first_name}} {{user.last_name}}</p>
-                          <p class="text-xs text-gray-600 dark:text-gray-400">
-                            {{user.teachers.phone}}
-                          </p>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                  <td class="px-4 py-3 text-sm space-y-2">
-                    {% for subject in user.teachers.subject_id.all %}
-                    <p>{{ subject.name }}</p>
-                    {% endfor %}
-                  </td>
-                  <td class="px-4 py-3 text-xs space-y-2">
-                    {% for course in user.teachers.course_id.all %}
-                    <p
-                      class="w-fit px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg lg:rounded-full dark:bg-green-700 dark:text-green-100">
-                      {{ course.name_type }}
-                    </p>
-                    {% endfor %}
-                  </td>
-                  <td class="px-4 py-3">
-                    <div class="flex items-center space-x-4 text-sm">
-                      <form action='{% url "edit" %}' method="POST">
-                        {% csrf_token %}
-                        <button data-id="{{user.id}}" name="edit_btn" 
-                          class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg border border-transparent dark:text-gray-400 focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600"
-                          aria-label="Edit">
-                          <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                              d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
-                            </path>
-                          </svg>
-                        </button>
-                      </form>
-                      <button data-id="{{user.id}}"
-                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg border border-transparent dark:text-gray-400 focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600"
-                        aria-label="Delete">
-                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd"
-                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                            clip-rule="evenodd"></path>
-                        </svg>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-    
-          <div
-            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-            <span class="flex items-center col-span-3">
-              Mostrando 21-30 of 100
-            </span>
-            <span class="col-span-2"></span>
-            <!-- Pagination -->
-            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-              <nav aria-label="Table navigation">
-                <ul class="inline-flex items-center">
-                  <li>
-                    <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                      aria-label="Previous">
-                      <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                        <path
-                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                          clip-rule="evenodd" fill-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      1
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      2
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      3
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      4
-                    </button>
-                  </li>
-                  <li>
-                    <span class="px-3 py-1">...</span>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      8
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                      9
-                    </button>
-                  </li>
-                  <li>
-                    <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                      aria-label="Next">
-                      <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                        <path
-                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                          clip-rule="evenodd" fill-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </span>
-          </div>
-        </div>
-      </section>
-
-      <div class="max-w-sm w-full h-fit shadow-xs">
-        <div class="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t-lg">
-          <div class="px-4 flex items-center justify-between">
-            <span tabindex="0" class="focus:outline-none  text-base font-bold dark:text-gray-100 text-gray-800">Octubre
-              2024</span>
-            <div class="flex items-center">
-              <button aria-label="calendar backward"
-                class="focus:text-gray-400 hover:text-gray-400 text-gray-800 dark:text-gray-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24"
-                  height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <polyline points="15 6 9 12 15 18" />
-                </svg>
-              </button>
-              <button aria-label="calendar forward"
-                class="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-800 dark:text-gray-100">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler  icon-tabler-chevron-right" width="24"
-                  height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <polyline points="9 6 15 12 9 18" />
-                </svg>
-              </button>
-  
-            </div>
-          </div>
-          <div class="flex items-center justify-between pt-12 overflow-x-auto">
-            <table class="w-full">
-              <thead>
-                <tr>
-                  <th>
-                    <div class="w-full flex justify-center">
-                      <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Lu</p>
-                    </div>
-                  </th>
-                  <th>
-                    <div class="w-full flex justify-center">
-                      <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Ma</p>
-                    </div>
-                  </th>
-                  <th>
-                    <div class="w-full flex justify-center">
-                      <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Mi</p>
-                    </div>
-                  </th>
-                  <th>
-                    <div class="w-full flex justify-center">
-                      <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Ju</p>
-                    </div>
-                  </th>
-                  <th>
-                    <div class="w-full flex justify-center">
-                      <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Vi</p>
-                    </div>
-                  </th>
-                  <th>
-                    <div class="w-full flex justify-center">
-                      <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Sa</p>
-                    </div>
-                  </th>
-                  <th>
-                    <div class="w-full flex justify-center">
-                      <p class="text-base font-medium text-center text-gray-800 dark:text-gray-100">Do</p>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="pt-6">
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center"></div>
-                  </td>
-                  <td class="pt-6">
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center"></div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center"></div>
-                  </td>
-                  <td class="pt-6">
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">1</p>
-                    </div>
-                  </td>
-                  <td class="pt-6">
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">2</p>
-                    </div>
-                  </td>
-                  <td class="pt-6">
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100">3</p>
-                    </div>
-                  </td>
-                  <td class="pt-6">
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100">4</p>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">5</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">6</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">7</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="w-full h-full">
-                      <div class="flex items-center justify-center w-full rounded-full cursor-pointer">
-                        <a role="link" tabindex="0"
-                          class="focus:outline-none  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">8</a>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">9</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100">10</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100">11</p>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">12</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">13</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">14</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">15</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">16</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100">17</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100">18</p>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">19</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">20</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">21</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">22</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">23</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100">24</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100">25</p>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">26</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">27</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">28</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">29</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="px-2 py-2 cursor-pointer flex w-full justify-center">
-                      <p class="text-base text-gray-500 dark:text-gray-100 font-medium">30</p>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="md:py-8 py-5 px-5 dark:bg-gray-700 bg-gray-50 rounded-b-lg">
-          <div class="px-4">
-            <div class="border-b pb-4 border-gray-400 border-dashed">
-              <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-              <a tabindex="0"
-                class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Evento de oratoria</a>
-              <p class="text-sm pt-2 leading-4 text-gray-600 dark:text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, harum.</p>
-            </div>
-            <div class="border-b pb-4 border-gray-400 border-dashed pt-5">
-              <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">10:00 AM</p>
-              <a tabindex="0"
-                class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Evento deportivo - Semifinales masculinas de fútbol</a>
-            </div>
-            <div class="border-b pb-4 border-gray-400 border-dashed pt-5">
-              <p class="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">9:00 AM</p>
-              <a tabindex="0"
-                class="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">Evento general - Día del niño</a>
-              <p class="text-sm pt-2 leading-4 text-gray-600 dark:text-gray-300">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea, vero.</p>
-            </div>
-          </div>
-        </div>
+                  </form>
+                  <button data-id="{{user.id}}"
+                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg border border-transparent dark:text-gray-400 focus:outline-none focus:shadow-outline-gray hover:border hover:border-purple-600"
+                    aria-label="Delete">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd"
+                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-    </section>
 
+      <div
+        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        <span class="flex items-center col-span-3">
+          Mostrando 21-30 of 100
+        </span>
+        <span class="col-span-2"></span>
+        <!-- Pagination -->
+        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+          <nav aria-label="Table navigation">
+            <ul class="inline-flex items-center">
+              <li>
+                <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                  aria-label="Previous">
+                  <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                    <path
+                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                      clip-rule="evenodd" fill-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  1
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  2
+                </button>
+              </li>
+              <li>
+                <button
+                  class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  3
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  4
+                </button>
+              </li>
+              <li>
+                <span class="px-3 py-1">...</span>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  8
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                  9
+                </button>
+              </li>
+              <li>
+                <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                  aria-label="Next">
+                  <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                    <path
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clip-rule="evenodd" fill-rule="evenodd"></path>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </span>
+      </div>
+    </div>
 
     <!-- Charts -->
     <!-- <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">

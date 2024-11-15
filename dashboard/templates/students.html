@@ -32,7 +32,7 @@
 
       <section class="p-4 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
-        <section class="w-full flex justify-between space-x-4">
+        <section class="w-full flex justify-between gap-4">
           <label class="w-full block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Nombre/s</span>
             <input name="first_name1" type="text" maxlength="150"
@@ -47,7 +47,7 @@
           </label>
         </section>
 
-        <section class="w-full flex justify-between space-x-4 mt-4">
+        <section class="w-full flex justify-between gap-4 mt-4">
           <label class="w-full block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Correo</span>
             <input name="email1" type="email"
@@ -63,10 +63,10 @@
         </section>
 
         <section
-          class="w-full flex justify-between flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          class="w-full flex justify-between gap-4 flex-wrap min-[425px]:flex-nowrap mt-4">
           <label class="block w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Cédula</span>
-            <div class="flex gap-2">
+            <div class="flex gap-4 min-[425px]:gap-2">
               <select name="idtype1"
                 class="block w-[88px] mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
                 <option value="0">...</option>
@@ -79,13 +79,13 @@
                 placeholder="12345678" />
             </div>
           </label>
-          <label class="block w-[46.5%] max-w-16 min-[425px]:w-full text-sm">
+          <label class="block w-[46.5%] min-[425px]:max-w-16 min-[425px]:full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Edad</span>
             <input name="age" type="number"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="0" />
           </label>
-          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+          <label class="block w-[46.5%] min-[425px]:full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Sexo</span>
             <select name="gender"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
@@ -98,7 +98,7 @@
         </section>
 
         <section
-          class="w-full flex justify-between flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          class="w-full flex justify-between gap-4 flex-wrap min-[425px]:flex-nowrap mt-4">
           <label class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Fecha de nacimiento</span>
             <input name="birthdate" type="date" maxlength="250"
@@ -127,7 +127,7 @@
         </section>
 
         <section
-          class="w-full h-min flex justify-between content-center flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          class="w-full h-min flex justify-between content-center gap-4 flex-wrap min-[425px]:flex-nowrap mt-4">
           <label class="block w-[46.5%] min-[425px]:w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Ciudad</span>
             <select name="city1"
@@ -190,7 +190,7 @@
       <section class="p-4 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
         <section
-          class="w-full flex justify-between flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0">
+          class="w-full flex justify-between gap-4 flex-wrap min-[425px]:flex-nowrap">
           <label class="block w-[46.5%] min-[425px]:w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Curso</span>
             <select name="course"
@@ -219,8 +219,8 @@
         </section>
 
         <section
-          class="w-full flex justify-between flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
-          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+          class="w-full flex justify-between gap-4 flex-wrap min-[506px]:flex-nowrap mt-4">
+          <label class="block w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Estatus</span>
             <select name="status"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
@@ -230,7 +230,7 @@
               <option value="Retirado">Retirado</option>
             </select>
           </label>
-          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+          <label class="block w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Tipo de escolaridad</span>
             <select name="shooling"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
@@ -239,7 +239,7 @@
               <option value="Repitiente">Repitiente</option>
             </select>
           </label>
-          <label class="block w-[46.5%] min-[425px]:w-full text-sm">
+          <label class="block w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Tipo de educación</span>
             <select name="education"
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
@@ -266,7 +266,7 @@
 
       <section class="p-4 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
-        <section class="w-full flex justify-between space-x-4">
+        <section class="w-full flex justify-between gap-4">
           <label class="w-full block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Nombre/s</span>
             <input name="first_name2" type="text" maxlength="150"
@@ -281,7 +281,7 @@
           </label>
         </section>
 
-        <section class="w-full flex justify-between space-x-4 mt-4">
+        <section class="w-full flex justify-between gap-4 mt-4">
           <label class="block w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">Cédula</span>
             <div class="flex gap-2">
@@ -306,7 +306,7 @@
         </section>
 
         <section
-          class="w-full h-min flex justify-between content-center flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          class="w-full h-min flex justify-between content-center gap-4 flex-wrap min-[425px]:flex-nowrap mt-4">
           <label class="w-full block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Correo</span>
             <input name="email2" type="email"
@@ -329,7 +329,7 @@
         </section>
 
         <section
-          class="w-full h-min flex justify-between content-center flex-wrap min-[425px]:flex-nowrap space-x-0 space-y-4 min-[425px]:space-x-4 min-[425px]:space-y-0 mt-4">
+          class="w-full h-min flex justify-between content-center gap-4 flex-wrap min-[425px]:flex-nowrap mt-4">
           <div class="w-full text-sm">
             <span class="text-gray-700 dark:text-gray-400">¿Desea usar la misma dirección?</span>
             <div class="mt-2 flex gap-4">
@@ -361,7 +361,7 @@
 
         <hr class="mt-8 mb-4 border border-gray-700" />
 
-        <section class="w-full flex space-x-4">
+        <section class="w-full flex gap-4">
           <button type="submit" name="btn_crear"
             class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
             Crear
