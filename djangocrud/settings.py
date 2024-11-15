@@ -112,7 +112,7 @@ DATABASES = {
     }
 }
 
-# DATABASES['default'] = dj_database_url.parse('postgresql://web_escuela_mrcy_d3b5_user:uDrgorcs8rDfHi7oHB88MHE8oGd4jhN0@dpg-csop37ij1k6c73aleotg-a.oregon-postgres.render.com/web_escuela_mrcy_d3b5')
+DATABASES['default'] = dj_database_url.parse('postgresql://web_escuela_mrcy_d3b5_user:uDrgorcs8rDfHi7oHB88MHE8oGd4jhN0@dpg-csop37ij1k6c73aleotg-a.oregon-postgres.render.com/web_escuela_mrcy_d3b5')
 
 
 # Password validation
@@ -150,7 +150,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # This production code might break development mode, so we check whether we're in DEBUG mode
 if not DEBUG:
