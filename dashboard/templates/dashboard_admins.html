@@ -298,16 +298,14 @@
               </td>
               <td class="px-4 py-3 text-sm space-y-2">
                 {% for subject in user.teachers.subject_id.all %}
-                <p>{{ subject.name }}</p>
+                <p>{{subject.name}}</p>
                 {% endfor %}
               </td>
               <td class="px-4 py-3 text-xs space-y-2">
-                {% for course in user.teachers.course_id.all %}
                 <p
                   class="w-fit px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-lg lg:rounded-full dark:bg-green-700 dark:text-green-100">
-                  {{ course.name_type }}
+                  {{user.teachers.course_type}}
                 </p>
-                {% endfor %}
               </td>
               <td class="px-4 py-3">
                 <div class="flex items-center space-x-4 text-sm">
