@@ -112,7 +112,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse('postgresql://web_escuela_mrcy_d3b5_user:uDrgorcs8rDfHi7oHB88MHE8oGd4jhN0@dpg-csop37ij1k6c73aleotg-a.oregon-postgres.render.com/web_escuela_mrcy_d3b5')
+DATABASES['default'] = dj_database_url.parse('postgresql://web_escuela_mrcy_rn1m_user:7r1appzr74xO9ap35AkqdIhVTZSLVb6y@dpg-ct0ktfogph6c73bb2h7g-a.oregon-postgres.render.com/web_escuela_mrcy_rn1m')
 
 
 # Password validation

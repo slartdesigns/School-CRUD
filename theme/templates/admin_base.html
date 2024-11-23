@@ -118,6 +118,18 @@
 										Panel principal
 									</a>
 								</li>
+								<!-- <li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'bills' %}">
+										Facturar
+									</a>
+								</li> -->
+								<li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'configuration-bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'configuration-bills' %}">
+										Configuración
+									</a>
+								</li>
 							</ul>
 						</template>
 					</li>
@@ -296,6 +308,18 @@
 										Panel principal
 									</a>
 								</li>
+								<!-- <li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'bills' %}">
+										Facturar
+									</a>
+								</li> -->
+								<li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'configuration-bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'configuration-bills' %}">
+										Configuración
+									</a>
+								</li>
 							</ul>
 						</template>
 					</li>
@@ -350,7 +374,7 @@
 		</aside>
 
 		<div class="flex flex-col flex-1">
-			<header class="z-10 py-4 bg-white border-l border-gray-900 shadow-md dark:bg-gray-800">
+			<header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
 				<div
 					class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
 					<!-- Mobile hamburger -->

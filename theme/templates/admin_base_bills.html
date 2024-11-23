@@ -118,6 +118,18 @@
 										Panel principal
 									</a>
 								</li>
+								<li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'bills' %}">
+										Facturar
+									</a>
+								</li>
+								<li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'configuration-bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'configuration-bills' %}">
+										Configuración
+									</a>
+								</li>
 							</ul>
 						<!-- </template> -->
 					</li>
@@ -294,6 +306,18 @@
 									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'dashboard-bills' %}border-transparent{% else %}border-purple-600{% endif %}">
 									<a class="w-full" href="{% url 'dashboard-bills' %}">
 										Panel principal
+									</a>
+								</li>
+								<li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'bills' %}">
+										Facturar
+									</a>
+								</li>
+								<li
+									class="px-2 py-1 transition-colors duration-150 border-l-2 hover:border-purple-600 hover:text-gray-800 dark:hover:text-gray-200 {% if request.resolver_match.view_name != 'configuration-bills' %}border-transparent{% else %}border-purple-600{% endif %}">
+									<a class="w-full" href="{% url 'configuration-bills' %}">
+										Configuración
 									</a>
 								</li>
 							</ul>

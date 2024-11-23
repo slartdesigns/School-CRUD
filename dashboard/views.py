@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from .models import CustomUser, Teachers, Students, Guardians, Subjects, Courses, Sections, Schedules, Tuition
+from .models import CustomUser, Teachers, Students, Guardians, Subjects, Courses, Sections, Schedules, Tuition, SchoolPeriod
 
 # Create your views here.
 t_user = CustomUser.objects.filter(user_type=2).all()
@@ -59,6 +59,7 @@ def dashboard_admins(request):
                 Subjects.objects.bulk_create(subj_list)
                 Sections.objects.bulk_create(sect_list)
                 Courses.objects.bulk_create(cour_list)
+                SchoolPeriod.objects.create(period='2024-2025').save()
                 print('Datos creados')
                 return redirect('/auth/dashboard-admins')
             except:
